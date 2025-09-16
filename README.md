@@ -1,39 +1,46 @@
-# 🛒 Dusty Shop (Second-Hand Market)
+# 📰 Naver News App
 
 ## 📌 프로젝트 소개
-Dusty Shop은 **중고거래 마켓 플랫폼**으로, 판매자가 상품을 등록하고 구매자가 주문 및 결제를 진행할 수 있는 **e-commerce 서비스**입니다.  
-관리자는 상품과 주문 내역을 관리할 수 있으며, 사용자는 장바구니/위시리스트 기능을 통해 편리하게 거래할 수 있습니다.
+**Naver News App**은 네이버 뉴스 검색 API를 활용하여 최신 뉴스를 검색하고 조회할 수 있는 Android 애플리케이션입니다.  
+사용자는 키워드로 뉴스를 검색할 수 있으며, 앱은 **Room Database**를 통해 검색 결과를 캐시하여 오프라인에서도 데이터를 확인할 수 있습니다.
 
 ---
 
-## 🏗️ 시스템 아키텍처
-(다이어그램 이미지 넣기)
-
-- **Backend**: Django (Python)
-- **Frontend**: HTML, CSS, Bootstrap
-- **Database**: SQLite (개발용) / PostgreSQL (운영용)
-- **Deployment**: (추가 예정)
+## 🏗️ 아키텍처
+- **언어/플랫폼**: Kotlin, Android
+- **아키텍처 패턴**: MVVM (Model-View-ViewModel)
+- **네트워킹**: Retrofit2 + Gson
+- **로컬 DB**: Room Database
+- **UI**: Jetpack Compose + Material3
+- **DI**: Service Locator 패턴
 
 ---
 
 ## ✨ 주요 기능
-- 회원가입 & 로그인 (계정 관리)
-- 상품 등록 / 수정 / 삭제
-- 장바구니 & 위시리스트
-- 주문 내역 확인 & 배송 상태 변경
-- 결제 모듈 연동 (Toss Payments)
-- 관리자 페이지에서 통계 및 주문 관리
+- 🔍 **뉴스 검색**: 키워드 기반 네이버 뉴스 검색
+- 💾 **로컬 저장소**: Room DB를 활용한 검색 결과 저장
+- 📑 **뉴스 상세 보기**: 리스트에서 뉴스 클릭 시 원문 링크 이동
+- 🎨 **UI**: Jetpack Compose 기반의 현대적 UI
 
 ---
 
 ## 🗂️ 폴더 구조
 ```plaintext
-Shop/
-├─ shop/           # Django 프로젝트 설정
-├─ accounts/       # 회원 관리 (로그인/회원가입)
-├─ products/       # 상품 관련 앱
-├─ orders/         # 주문 & 배송 관리
-├─ cart/           # 장바구니 & 위시리스트
-├─ static/         # CSS, JS, 이미지 파일
-├─ templates/      # HTML 템플릿
-└─ README.md
+naverapp/
+├─ app/src/main/java/com/example/newsapp/
+│  ├─ data/                  # Room DB (NewsDao, NewsDatabase)
+│  ├─ ui/                    # UI (Compose, Theme)
+│  ├─ MainActivity.kt        # 앱 진입점
+│  ├─ NewsApp.kt             # Compose Navigation
+│  ├─ NewsRepository.kt      # 데이터 저장소 (네트워크 + 캐시)
+│  ├─ NewsRetrofit.kt        # Retrofit API 정의
+│  ├─ NewsViewModel.kt       # ViewModel (비즈니스 로직)
+│  ├─ ServiceLocator.kt      # 의존성 주입 관리
+│  └─ model.kt               # 데이터 모델 정의
+│
+├─ app/src/main/res/
+│  ├─ layout/                # activity_main.xml
+│  ├─ values/                # colors.xml, strings.xml, themes.xml
+│  └─ drawable/              # 아이콘, 이미지 리소스
+│
+└─ AndroidManifest.xml
